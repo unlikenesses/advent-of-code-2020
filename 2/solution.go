@@ -1,12 +1,10 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
 	"regexp"
 	"strconv"
+	"github.com/unlikenesses/utils"
 )
 
 type Policy struct {
@@ -21,30 +19,11 @@ type Password struct {
 }
 
 func main() {
-	lines := readInput()
+	lines := utils.ReadInput()
 	passwords := parsePasswords(lines)
 	// validPasswords := getValidPasswordsPartOne(passwords)
 	validPasswords := getValidPasswordsPartTwo(passwords)
 	fmt.Println(len(validPasswords))
-}
-
-func readInput() []string {
-	file, err := os.Open("./input.txt")
-	if err != nil {
-		log.Fatal("Could not open file")
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	return lines
 }
 
 func parsePasswords(lines []string) []Password {

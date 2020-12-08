@@ -1,13 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
 	"regexp"
 	"strconv"
 	"strings"
+	"github.com/unlikenesses/utils"
 )
 
 type Rule struct {
@@ -23,31 +21,12 @@ type Containee struct {
 var rules []Rule
 
 func main() {
-	lines := readInput()
+	lines := utils.ReadInput()
 	rules = parseRules(lines)
 	parents := getParentBags("shiny gold")
 	fmt.Println(len(parents))
 	numBags := getNumBagsInside("shiny gold")
 	fmt.Println(numBags)
-}
-
-func readInput() []string {
-	file, err := os.Open("./input.txt")
-	if err != nil {
-		log.Fatal("Could not open file")
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	return lines
 }
 
 func parseRules(lines []string) []Rule {

@@ -1,11 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
 	"sort"
+	"github.com/unlikenesses/utils"
 )
 
 type byArrayLength [][]string
@@ -17,30 +15,11 @@ func (a byArrayLength) Less(i, j int) bool {
 }
 
 func main() {
-	lines := readInput()
+	lines := utils.ReadInput()
 	// counts := getCountsPartOne(lines)
 	counts := getCountsPartTwo(lines)
 	sum := arraySum(counts)
 	fmt.Println(sum)
-}
-
-func readInput() []string {
-	file, err := os.Open("./input.txt")
-	if err != nil {
-		log.Fatal("Could not open file")
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	return lines
 }
 
 func getCountsPartOne(lines []string) []int {

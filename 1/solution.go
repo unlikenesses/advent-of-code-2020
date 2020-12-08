@@ -1,28 +1,13 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
 	"strconv"
+	"github.com/unlikenesses/utils"
 )
 
 func main() {
-	file, err := os.Open("./input.txt")
-	if err != nil {
-		log.Fatal("Could not open file")
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
+	lines := utils.ReadInput()
 
 	part1_num1, part1_num2 := partOneNumbers(lines)
 	fmt.Println(part1_num1 * part1_num2)

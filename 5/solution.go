@@ -1,38 +1,17 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
+	"github.com/unlikenesses/utils"
 )
 
 func main() {
-	lines := readInput()
+	lines := utils.ReadInput()
 	seatIds := parseBoardingPasses(lines)
 	highest := getHighestId(seatIds)
 	fmt.Println(highest)
 	mySeat := getMySeat(seatIds)
 	fmt.Println(mySeat) 
-}
-
-func readInput() []string {
-	file, err := os.Open("./input.txt")
-	if err != nil {
-		log.Fatal("Could not open file")
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	return lines
 }
 
 func parseBoardingPasses(lines []string) []int {

@@ -1,12 +1,10 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
 	"regexp"
 	"strconv"
+	"github.com/unlikenesses/utils"
 )
 
 type Command struct {
@@ -17,30 +15,11 @@ type Command struct {
 var accumulator int
 
 func main() {
-	lines := readInput()
+	lines := utils.ReadInput()
 	commands := parseCommands(lines)
 	// partOne(commands)
 	partTwo(commands)
 	fmt.Println(accumulator)
-}
-
-func readInput() []string {
-	file, err := os.Open("./input.txt")
-	if err != nil {
-		log.Fatal("Could not open file")
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	return lines
 }
 
 func parseCommands(lines []string) []Command {

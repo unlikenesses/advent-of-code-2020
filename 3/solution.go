@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
+	"github.com/unlikenesses/utils"
 )
 
 type Grid struct {
@@ -22,30 +20,11 @@ type Slope struct {
 }
 
 func main() {
-	lines := readInput()
+	lines := utils.ReadInput()
 	grid := buildGrid(lines)
 	// trees := partOneTrees(grid)
 	trees := partTwoTrees(grid)
 	fmt.Println(trees)
-}
-
-func readInput() []string {
-	file, err := os.Open("./input.txt")
-	if err != nil {
-		log.Fatal("Could not open file")
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	return lines
 }
 
 func buildGrid(lines []string) Grid {

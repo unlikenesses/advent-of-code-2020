@@ -1,13 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
 	"regexp"
 	"strconv"
 	"strings"
+	"github.com/unlikenesses/utils"
 )
 
 type Passport struct {
@@ -22,30 +20,11 @@ type Passport struct {
 }
 
 func main() {
-	lines := readInput()
+	lines := utils.ReadInput()
 	passports := readPassports(lines)
 	// valid := getNumValidPassports(passports, 1)
 	valid := getNumValidPassports(passports, 2)
 	fmt.Println(valid)
-}
-
-func readInput() []string {
-	file, err := os.Open("./input.txt")
-	if err != nil {
-		log.Fatal("Could not open file")
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	return lines
 }
 
 func readPassports(lines []string) []Passport {
